@@ -1,3 +1,4 @@
-class Listing < ApplicationRecord
-	has_one_attached:image
+class Listing < ActiveRecord::Base
+  has_one_attached :image
+  validates :image, presence: true
 end
