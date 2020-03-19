@@ -37,6 +37,7 @@ gem "paperclip", "~> 6.0.0"
 gem 'image_processing'
 gem 'activestorage-dropbox'
 gem 'figaro'
+gem 'devise'
 
 group :production do
 	gem 'pg'
