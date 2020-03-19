@@ -35,8 +35,12 @@ gem 'bootstrap', '~> 4.4.1'
 gem 'jquery-rails'
 gem "paperclip", "~> 6.0.0"
 gem 'image_processing'
+gem 'activestorage-dropbox'
+gem 'figaro'
 
 group :production do
 	gem 'pg'
 	gem 'rails_12factor'
 end
+
+
