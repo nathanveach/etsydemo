@@ -1,23 +1,33 @@
-<div class="card-columns text-center">
-  <% @listings.each do |listing| %>
-    <div class="card">
-      <% if listing.image.attached? %>
-        <%= image_tag listing.image, class: 'card-img-top' %>
-      <% else %>
-        <%= image_tag 'default-image.jpg', class: 'card-img-top' %>
-      <% end %><br/>
-      <div class="card-body">
-        <h2><%= listing.name %></h2><br/>
-        <p><%= number_to_currency listing.price %></p>
-        <p><%= "Sold by #{listing.user.name}" %></p>
-          <%= link_to 'Show', listing, class: 'btn btn-link stretched-link' %>
-      </div>
+</div>
+  <div class="jumbotron jumbotron-fluid text-light text-right">
+    <div class="container">
+      <h1>Handcrafted items from around the world.</h1><br/>
+      <h2>Discover one-of-a-kind items</h2>
     </div>
+  </div>
+
+<div class="container">
+  <div class="card-columns text-center">
+    <% @listings.each do |listing| %>
+      <div class="card">
+        <% if listing.image.attached? %>
+          <%= image_tag listing.image, class: 'card-img-top' %>
+        <% else %>
+          <%= image_tag 'default-image.jpg', class: 'card-img-top' %>
+        <% end %><br/>
+        <div class="card-body">
+          <h2><%= listing.name %></h2><br/>
+          <p><%= number_to_currency listing.price %></p>
+          <p><%= "Sold by #{listing.user.name}" %></p>
+            <%= link_to 'Show', listing, class: 'btn btn-link stretched-link' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <br/>
+
+  <% if user_signed_in? %>
+    <%= link_to 'New Listing', new_listing_path, class: 'btn btn-link' %>
   <% end %>
 </div>
-
-<br/>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Listing', new_listing_path, class: 'btn btn-link' %>
-<% end %>
