@@ -38,6 +38,7 @@ gem 'image_processing'
 gem 'activestorage-dropbox'
 gem 'figaro'
 gem 'devise'
+gem 'stripe'
 
 group :production do
 	gem 'pg'
