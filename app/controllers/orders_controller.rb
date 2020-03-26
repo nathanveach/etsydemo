@@ -34,11 +34,11 @@ class OrdersController < ApplicationController
     token = params[:stripeToken]
 
     begin
-      charge = Stripe::Charge.create(
+      charge = Stripe::Charge.create({
+        source: token,
         amount: (@listing.price * 100).floor,
-        currency: 'usd',
-        card: token
-        )
+        currency: 'usd'
+        })
       flash[:notice] = "Thanks for ordering!"
     rescue Stripe::CardError => e
       flash[:danger] = e.message
