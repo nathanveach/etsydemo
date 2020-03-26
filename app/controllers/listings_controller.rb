@@ -36,14 +36,26 @@ class ListingsController < ApplicationController
     @listing.user_id = current_user.id  
 
 
-    Stripe.api_key = ENV["STRIPE_API_KEY"]
-    token = params[:stripeToken]
+    if current_user.recipient.blank?
+      Stripe.api_key = ENV["STRIPE_API_KEY"]
+      token = params[:stripeToken]
 
-    recipient = Stripe::Account.create(
-      type: 'custom',
-      country: 'US',
-      email: current_user.email
-      )
+      recipient = Stripe::Account.create(
+        type: 'custom',
+        country: 'US',
+        email: current_user.email,
+        business_type: 'individual',
+        individual: {
+          email: current_user.email,
+          first_name: current_user.name
+        },
+        tos_acceptance: {
+          date: Time.now.to_i,
+          ip: request.remote_ip
+        },
+        requested_capabilities: ['card_payments', 'transfers']
+        )
+    end
 
     current_user.recipient = recipient.id
     current_user.save
